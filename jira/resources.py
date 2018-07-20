@@ -733,6 +733,15 @@ class IssueType(Resource):
             self._parse_raw(raw)
 
 
+class NotificationScheme(Resource):
+    """A JIRA notification scheme."""
+
+    def __init__(self, options, session, raw=None):
+        Resource.__init__(self, 'notificationscheme/{0}', options, session)
+        if raw:
+            self._parse_raw(raw)
+
+
 class Priority(Resource):
     """Priority that can be set on an issue."""
 
@@ -747,6 +756,33 @@ class Project(Resource):
 
     def __init__(self, options, session, raw=None):
         Resource.__init__(self, "project/{0}", options, session)
+        if raw:
+            self._parse_raw(raw)
+
+
+class ProjectCategory(Resource):
+    """ProjectCategory for a project."""
+
+    def __init__(self, options, session, raw=None):
+        Resource.__init__(self, 'projectCategory/{0}', options, session)
+        if raw:
+            self._parse_raw(raw)
+
+
+class Permission(Resource):
+    """A JIRA permission."""
+
+    def __init__(self, options, session, raw=None):
+        Resource.__init__(self, 'permissionscheme/{0}/permission/{1}', options, session)
+        if raw:
+            self._parse_raw(raw)
+
+
+class PermissionScheme(Resource):
+    """A JIRA permission scheme."""
+
+    def __init__(self, options, session, raw=None):
+        Resource.__init__(self, 'permissionscheme/{0}', options, session)
         if raw:
             self._parse_raw(raw)
 
@@ -1071,30 +1107,37 @@ def dict2resource(raw, top=None, options=None, session=None):
 
 
 resource_class_map = {
-    # Jira-specific resources
-    r"attachment/[^/]+$": Attachment,
-    r"component/[^/]+$": Component,
-    r"customFieldOption/[^/]+$": CustomFieldOption,
-    r"dashboard/[^/]+$": Dashboard,
-    r"filter/[^/]$": Filter,
-    r"issue/[^/]+$": Issue,
-    r"issue/[^/]+/comment/[^/]+$": Comment,
-    r"issue/[^/]+/votes$": Votes,
-    r"issue/[^/]+/watchers$": Watchers,
-    r"issue/[^/]+/worklog/[^/]+$": Worklog,
-    r"issueLink/[^/]+$": IssueLink,
-    r"issueLinkType/[^/]+$": IssueLinkType,
-    r"issuetype/[^/]+$": IssueType,
-    r"priority/[^/]+$": Priority,
-    r"project/[^/]+$": Project,
-    r"project/[^/]+/role/[^/]+$": Role,
-    r"resolution/[^/]+$": Resolution,
-    r"securitylevel/[^/]+$": SecurityLevel,
-    r"status/[^/]+$": Status,
-    r"statuscategory/[^/]+$": StatusCategory,
-    r"user\?(username|accountId).+$": User,
-    r"group\?groupname.+$": Group,
-    r"version/[^/]+$": Version,
+    # JIRA specific resources
+    r'attachment/[^/]+$': Attachment,
+    r'component/[^/]+$': Component,
+    r'customFieldOption/[^/]+$': CustomFieldOption,
+    r'dashboard/[^/]+$': Dashboard,
+    r'filter/[^/]$': Filter,
+    r'issue/[^/]+$': Issue,
+    r'issue/[^/]+/comment/[^/]+$': Comment,
+    r'issue/[^/]+/votes$': Votes,
+    r'issue/[^/]+/watchers$': Watchers,
+    r'issue/[^/]+/worklog/[^/]+$': Worklog,
+    r'issueLink/[^/]+$': IssueLink,
+    r'issueLinkType/[^/]+$': IssueLinkType,
+    r'issuetype/[^/]+$': IssueType,
+    r'notificationscheme/[^/]+$': NotificationScheme,
+    r'permissionscheme/[^/]+$': PermissionScheme,
+    r'permissionscheme/[^/]+/permission/[^/]+$': Permission,
+    r'priority/[^/]+$': Priority,
+    r'project/[^/]+$': Project,
+    r'project/[^/]+/notificationscheme/[^/]+$': NotificationScheme,
+    r'project/[^/]+/permissionscheme/[^/]+$': PermissionScheme,
+    r'project/[^/]+/role/[^/]+$': Role,
+    r'projectCategory/[^/]+$': ProjectCategory,
+    r'resolution/[^/]+$': Resolution,
+    r'role/[^/]+$': Role,
+    r'securitylevel/[^/]+$': SecurityLevel,
+    r'status/[^/]+$': Status,
+    r'statuscategory/[^/]+$': StatusCategory,
+    r'user\?username.+$': User,
+    r'group\?groupname.+$': Group,
+    r'version/[^/]+$': Version,
     # GreenHopper specific resources
     r"sprints/[^/]+$": Sprint,
     r"views/[^/]+$": Board,
