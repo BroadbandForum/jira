@@ -832,7 +832,7 @@ class Role_(Resource):
             },
         }
 
-        super(Role, self).update(**data)
+        super(Role_, self).update(**data)
 
     def add_user(self, users=None, groups=None):
         """Add the specified users or groups to this project role.
