@@ -2246,13 +2246,14 @@ class JIRA(object):
         ]
         return projects
 
-    def project(self, id):
+    # XXX I'm not sure that 'expand' is honored
+    def project(self, id, expand=None):
         """Get a project Resource from the server.
 
         :param id: ID or key of the project to get
         :rtype: Project
         """
-        return self._find_for_resource(Project, id)
+        return self._find_for_resource(Project, id, expand=expand)
 
     # non-resource
     @translate_resource_args
